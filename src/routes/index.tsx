@@ -1,7 +1,7 @@
 // Wedding invitation — editable details are stored per-device; see /edit.
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import songAsset from "@/assets/din-shagna-da.mp3.asset.json";
+// import songAsset from "@/assets/din-shagna-da.mp3.asset.json";
 
 
 import mandap from "@/assets/mandap.jpg";
@@ -138,16 +138,31 @@ function Index() {
     setMuted(a.muted);
   };
 
+  // const startMusic = () => {
+  //   if (!audioRef.current) {
+  //     const a = new Audio(songAsset.url);
+  //     a.loop = true;
+  //     a.preload = "auto";
+  //     audioRef.current = a;
+  //   }
+  //   audioRef.current.muted = muted;
+  //   void audioRef.current.play().catch(() => {});
+  // };
+
+
   const startMusic = () => {
-    if (!audioRef.current) {
-      const a = new Audio(songAsset.url);
-      a.loop = true;
-      a.preload = "auto";
-      audioRef.current = a;
-    }
-    audioRef.current.muted = muted;
-    void audioRef.current.play().catch(() => {});
-  };
+  if (!audioRef.current) {
+    // Point directly to the file in your public/ folder
+    const a = new Audio("/audio.mp3");
+    a.loop = true;
+    a.preload = "auto";
+    audioRef.current = a;
+  }
+  audioRef.current.muted = muted;
+  audioRef.current.play().catch((err) => {
+    console.error("Audio playback error:", err);
+  });
+};
 
   const wd = new Date(inv.weddingDateTime);
   const short = isNaN(wd.getTime())
