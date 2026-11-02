@@ -76,6 +76,17 @@ function Edit() {
             {saved && <span className="text-sm text-muted-foreground">Saved ✓</span>}
             <button className={btn} onClick={() => { if (confirm("Reset all details to the original?")) { resetInvitation(); setInv(defaultInvitation); } }}>Reset</button>
             <button className="rounded-full bg-primary px-5 py-2 text-sm text-primary-foreground" onClick={() => { saveInvitation(inv); setSaved(true); }}>Save</button>
+            <button
+  type="button"
+  onClick={() => {
+    // Replace `formData` with whatever state variable holds the form fields in edit.tsx
+    navigator.clipboard.writeText(JSON.stringify(formData, null, 2));
+    alert("Configuration copied to clipboard! Paste it into src/data/invitation.ts");
+  }}
+  className="px-4 py-2 bg-emerald-600 text-white rounded-md font-medium hover:bg-emerald-700 transition"
+>
+  📋 Copy Code to Clipboard
+</button>
             <Link to="/" className={btn}>View</Link>
           </div>
         </div>
