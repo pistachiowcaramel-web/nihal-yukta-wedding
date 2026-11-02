@@ -1,6 +1,8 @@
 // Wedding invitation — editable details are stored per-device; see /edit.
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import songAsset from "@/assets/din-shagna-da.mp3.asset.json";
+
 
 import mandap from "@/assets/mandap.jpg";
 import haldi from "@/assets/haldi.jpg";
@@ -124,6 +126,29 @@ function Index() {
   const [inv] = useInvitation();
   const [open, setOpen] = useState(false);
   const [letter, setLetter] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => () => { audioRef.current?.pause(); }, []);
+
+  const toggleMute = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.muted = !a.muted;
+    setMuted(a.muted);
+  };
+
+  const startMusic = () => {
+    if (!audioRef.current) {
+      const a = new Audio(songAsset.url);
+      a.loop = true;
+      a.preload = "auto";
+      audioRef.current = a;
+    }
+    audioRef.current.muted = muted;
+    void audioRef.current.play().catch(() => {});
+  };
+
   const wd = new Date(inv.weddingDateTime);
   const short = isNaN(wd.getTime())
     ? ""
