@@ -1,10 +1,5 @@
 # Nihal Yukta Wedding
 
-https://sahithi-harishith-wedding-invitation.netlify.app/
-make a same project with editable options for all details
-
-This project was built with [Lovable](https://lovable.dev).
-
 **Live app**: https://nihal-yukta-wedding.lovable.app
 
 ## Build with Lovable
