@@ -58,11 +58,11 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 export const newId = uid;
 
 export const defaultInvitation: Invitation = {
-  topBlessing: "॥ Śrī Rāma Jayam ॥",
+  topBlessing: "॥ Jay Bhim ॥",
   heading: "Śubha Vivāha Āhvānam",
-  bride: "Geeta Sahithi",
-  groom: "Harishith Kumar",
-  city: "Hyderabad",
+  bride: "Yukta Ramteke",
+  groom: "Nihal Borkar",
+  city: "Brahmapuri",
   weddingDateTime: "2026-11-05T07:41",
   blessingLine: "Śrīrastu · Śubhamastu · Avighnamastu",
   shloka: "Maṅgalaṁ Bhagavān Viṣṇuḥ, Maṅgalaṁ Garuḍadhvajaḥ.",
