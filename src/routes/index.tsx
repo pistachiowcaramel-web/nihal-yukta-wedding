@@ -182,7 +182,7 @@ function Index() {
         <button
           onClick={toggleMute}
           aria-label={muted ? "Unmute music" : "Mute music"}
-          className="fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold bg-maroon-deep/80 text-lg text-gold shadow-card backdrop-blur"
+          className="fixed bottom-4 left-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold bg-maroon-deep/80 text-lg text-gold shadow-card backdrop-blur"
         >
           {muted ? "🔇" : "🔊"}
         </button>
