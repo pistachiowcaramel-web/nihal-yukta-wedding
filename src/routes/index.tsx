@@ -1,5 +1,7 @@
+// Wedding invitation — editable details are stored per-device; see /edit.
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+
 import mandap from "@/assets/mandap.jpg";
 import haldi from "@/assets/haldi.jpg";
 import {
