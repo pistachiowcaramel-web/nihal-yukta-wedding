@@ -1,6 +1,8 @@
 // Wedding invitation — editable details are stored per-device; see /edit.
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import songAsset from "@/assets/din-shagna-da.mp3.asset.json";
+
 
 import mandap from "@/assets/mandap.jpg";
 import haldi from "@/assets/haldi.jpg";
@@ -124,6 +126,29 @@ function Index() {
   const [inv] = useInvitation();
   const [open, setOpen] = useState(false);
   const [letter, setLetter] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => () => { audioRef.current?.pause(); }, []);
+
+  const toggleMute = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.muted = !a.muted;
+    setMuted(a.muted);
+  };
+
+  const startMusic = () => {
+    if (!audioRef.current) {
+      const a = new Audio(songAsset.url);
+      a.loop = true;
+      a.preload = "auto";
+      audioRef.current = a;
+    }
+    audioRef.current.muted = muted;
+    void audioRef.current.play().catch(() => {});
+  };
+
   const wd = new Date(inv.weddingDateTime);
   const short = isNaN(wd.getTime())
     ? ""
@@ -138,6 +163,17 @@ function Index() {
         ✎ Edit details
       </Link>
 
+      {open && (
+        <button
+          onClick={toggleMute}
+          aria-label={muted ? "Unmute music" : "Mute music"}
+          className="fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold bg-maroon-deep/80 text-lg text-gold shadow-card backdrop-blur"
+        >
+          {muted ? "🔇" : "🔊"}
+        </button>
+      )}
+
+
       {/* Hero */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
         <img src={mandap} alt="Decorated wedding mandapam" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover" />
@@ -150,10 +186,11 @@ function Index() {
           </h1>
           <p className="mt-4 tracking-widest">{short} · {inv.city}</p>
           {!open && (
-            <button onClick={() => { setOpen(true); setTimeout(() => document.getElementById("main")?.scrollIntoView({ behavior: "smooth" }), 50); }} className="mt-10 rounded-full border border-gold px-8 py-3 text-gold transition hover:bg-gold hover:text-maroon-deep">
+            <button onClick={() => { startMusic(); setOpen(true); setTimeout(() => document.getElementById("main")?.scrollIntoView({ behavior: "smooth" }), 50); }} className="mt-10 rounded-full border border-gold px-8 py-3 text-gold transition hover:bg-gold hover:text-maroon-deep">
               Open the invitation
             </button>
           )}
+
         </div>
       </section>
 

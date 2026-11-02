@@ -1,1 +1,1 @@
-- [ ] Add background music: user will upload a Hindi MP3; wire playback to "Open the invitation" with a mute button.
+- [x] Add background music: user uploaded Din Shagna Da; plays on "Open the invitation" with a mute button.
