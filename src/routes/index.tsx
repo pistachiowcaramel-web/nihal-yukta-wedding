@@ -153,7 +153,7 @@ function Index() {
   const startMusic = () => {
   if (!audioRef.current) {
     // Point directly to the file in your public/ folder
-    const a = new Audio("/audio.mp3");
+    const a = new Audio("/song.mp3");
     a.loop = true;
     a.preload = "auto";
     audioRef.current = a;
