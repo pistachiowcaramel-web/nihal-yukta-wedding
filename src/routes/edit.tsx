@@ -128,7 +128,7 @@ function Edit() {
             <Field label="Note" value={e.note} onChange={(v) => setEvent(i, "note", v)} />
           </Card>
         ))}
-        <button className={btn} onClick={() => set("events", [...inv.events, { ...defaultInvitation.events[2], id: newId(), title: "New Event" }])}>+ Add event</button>
+        <button className={btn} onClick={() => set("events", [...inv.events, { ...(defaultInvitation.events[2] as EventItem), id: newId(), title: "New Event" }])}>+ Add event</button>
 
         <Card title="Travel" action={<button className={btn} onClick={() => set("transports", [...inv.transports, { id: newId(), mode: "", name: "", detail: "" }])}>+ Add</button>}>
           <div className="sm:col-span-2">{f("travelNote", "Travel note", true)}</div>
